@@ -34,6 +34,7 @@ class Job(Base):
     description = Column(Text, nullable=False)             # description
     company_industry = Column(String, nullable=True)       # company_industry
     company_url = Column(Text, nullable=True)              # company_url
+    created_at = Column(DateTime, default=datetime.utcnow())
 
     applications = relationship("Application", back_populates="job")
 

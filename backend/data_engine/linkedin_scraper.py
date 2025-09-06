@@ -18,6 +18,7 @@ class LinkedInDataEngine(DataEngine):
             search_term=query,
             location=location,
             results_wanted=limit,
+            hours_old=10,
             linkedin_fetch_description=True
         )
         if jobs_df is None or jobs_df.empty:
@@ -62,7 +63,10 @@ class LinkedInDataEngine(DataEngine):
         return job_postings
 
 
-#Example Run
+# Example Run
+# To run this file directly, use:
+#   python -m data_engine.linkedin_scraper
+# from the project root (backend/)
 if __name__=='__main__':
     engine = LinkedInDataEngine()
-    jobs = engine.fetch_jobs(query="software engineer", location="Mumbai, India", limit=1)
+    jobs = engine.fetch_jobs(query="software engineer", location="Mumbai, India", limit=10)
