@@ -1,6 +1,8 @@
 from abc import ABC, abstractmethod
 from typing import List
-from backend.schemas.job import JobPosting
+
+from schemas.job import JobPosting
+
 
 class DataEngine(ABC):
     """Abstract interface for job data sources (LinkedIn, Indeed, etc.)."""
