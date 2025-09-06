@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 from typing import List
-from schemas.job import JobPosting
-from schemas.user import UserProfile
+from backend.schemas.job import JobPosting
+from backend.schemas.user import UserProfile
 
 class FiltrationEngine(ABC):
     """Abstract interface for filtering job postings."""

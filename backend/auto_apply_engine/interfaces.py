@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
-from schemas.job import JobPosting
-from schemas.user import UserProfile
+from backend.schemas.job import JobPosting
+from backend.schemas.user import UserProfile
 
 class AutoApplyEngine(ABC):
     """Abstract interface for auto-applying to job postings."""
