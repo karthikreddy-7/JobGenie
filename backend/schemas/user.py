@@ -14,13 +14,6 @@ class UserPreferences(BaseModel):
     keywords: Optional[List[str]] = None   # must-have words in job description
     blacklist_keywords: Optional[List[str]] = None  # reject jobs containing these
 
-class UserProfile(BaseModel):
-    user_id: str
-    resume: Resume
-    preferences: Optional[UserPreferences] = None
-    linkedin: Optional[LinkedInCredentials] = None
-    userAutomationSettings: UserAutomationSettings = None
-
 class UserAutomationSettings(BaseModel):
     auto_apply: bool = False
     referral_enabled: bool = True
@@ -34,65 +27,65 @@ class LinkedInCredentials(BaseModel):
     password: str
     auth_token: Optional[str] = None   # session cookie / CSRF token if needed
 
-export interface Header {
-  fullName: string;
-  location: string;
-  phone: string;
-  email: string;
-  linkedin: string;
-  github: string;
-  portfolio: string;
-}
+class Header(BaseModel):
+  full_name: str
+  location: str
+  phone: str
+  email: str
+  linkedin: str
+  github: str
+  portfolio: str
 
-export interface EducationEntry {
-  id: string;
-  institution: string;
-  degree: string;
-  city: string;
-  startDate: string;
-  endDate: string;
-  gpa: string;
-  coursework: string;
-}
+class EducationEntry(BaseModel):
+  id: str
+  institution: str
+  degree: str
+  city: str
+  start_date: str
+  end_date: str
+  gpa: str
+  coursework: str
 
-export interface ExperienceEntry {
-  id: string;
-  company: string;
-  role: string;
-  city: string;
-  startDate: string;
-  endDate: string;
-  bullets: string[];
-}
+class ExperienceEntry(BaseModel):
+  id: str
+  company: str
+  role: str
+  city: str
+  start_date: str
+  end_date: str
+  bullets: List[str]
 
-export interface ProjectEntry {
-  id: string;
-  title: string;
-  date: string;
-  technologies: string;
-  link: string;
-  descriptionBullets: string[];
-}
+class ProjectEntry(BaseModel):
+  id: str
+  title: str
+  date: str
+  technologies: str
+  link: str
+  description_bullets: List[str]
 
-export interface Skills {
-  programmingLanguages: string[];
-  frameworksTools: string[];
-  other: string[];
-}
+class Skills(BaseModel):
+  programming_languages: List[str]
+  frameworks_tools: List[str]
+  other: List[str]
 
-export interface CertificationEntry {
-  id: string;
-  title: string;
-  issuer: string;
-  date: string;
-}
+class CertificationEntry(BaseModel):
+  id: str
+  title: str
+  issuer: str
+  date: str
 
-export interface Resume {
-  header: Header;
-  summary: string | null;
-  education: EducationEntry[];
-  experience: ExperienceEntry[];
-  projects: ProjectEntry[];
-  skills: Skills;
-  certifications: CertificationEntry[];
-}
+class Resume(BaseModel):
+  header: Header
+  summary: Optional[str] = None
+  education: List[EducationEntry]
+  experience: List[ExperienceEntry]
+  projects: List[ProjectEntry]
+  skills: Skills
+  certifications: List[CertificationEntry]
+
+class UserProfile(BaseModel):
+    user_id: str
+    resume: Resume
+    preferences: Optional[UserPreferences] = None
+    linkedin: Optional[LinkedInCredentials] = None
+    user_automation_settings: Optional[UserAutomationSettings] = None
