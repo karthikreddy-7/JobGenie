@@ -22,13 +22,18 @@ class ApplicationStatusEnum(enum.Enum):
 class Job(Base):
     __tablename__ = "jobs"
 
-    job_id = Column(String, primary_key=True, index=True)
-    title = Column(String, nullable=False)
-    description = Column(Text, nullable=False)
-    company = Column(String, nullable=False)
-    location = Column(String, nullable=True)
-    link = Column(Text, nullable=False)
-    source = Column(String, default="LinkedIn")
+    job_id = Column(String, primary_key=True, index=True)  # id
+    site = Column(String, nullable=False)                  # site
+    job_url = Column(Text, nullable=False)                 # job_url
+    job_url_direct = Column(Text, nullable=True)           # job_url_direct
+    title = Column(String, nullable=False)                 # title
+    company = Column(String, nullable=False)               # company
+    location = Column(String, nullable=True)               # location
+    date_posted = Column(String, nullable=True)            # date_posted
+    job_level = Column(String, nullable=True)              # job_level
+    description = Column(Text, nullable=False)             # description
+    company_industry = Column(String, nullable=True)       # company_industry
+    company_url = Column(Text, nullable=True)              # company_url
 
     applications = relationship("Application", back_populates="job")
 

@@ -44,12 +44,17 @@ class LinkedInDataEngine(DataEngine):
         for posting in job_postings:
             job = Job(
                 job_id=posting.id,
+                site=posting.site,
+                job_url=posting.job_url,
+                job_url_direct=posting.job_url_direct,
                 title=posting.title,
-                description=posting.description,
                 company=posting.company,
                 location=posting.location,
-                link=posting.job_url,
-                source=posting.site
+                date_posted=posting.date_posted,
+                job_level=posting.job_level,
+                description=posting.description,
+                company_industry=posting.company_industry,
+                company_url=posting.company_url
             )
             db.add(job)
         db.commit()
@@ -61,4 +66,3 @@ class LinkedInDataEngine(DataEngine):
 if __name__=='__main__':
     engine = LinkedInDataEngine()
     jobs = engine.fetch_jobs(query="software engineer", location="Mumbai, India", limit=1)
-
