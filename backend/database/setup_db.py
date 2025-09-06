@@ -1,6 +1,6 @@
-import os
 from sqlalchemy import create_engine
-from models import Base
+from sqlalchemy.orm import sessionmaker
+import os
 from dotenv import load_dotenv
 
 # Load environment variables from .env file
@@ -8,11 +8,14 @@ load_dotenv()
 
 DATABASE_URL = os.getenv("DATABASE_URL")
 
-if not DATABASE_URL:
-    raise ValueError("❌ DATABASE_URL not found in .env file")
+DB_URI = f"postgresql://{os.getenv('DB_USER')}:{os.getenv('DB_PASSWORD')}@{os.getenv('DB_HOST')}:{os.getenv('DB_PORT')}/{os.getenv('DB_NAME')}"
 
-# Create engine and initialize tables
-engine = create_engine(DATABASE_URL)
-Base.metadata.create_all(engine)
+engine = create_engine(DB_URI)
+SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
-print("✅ Tables created successfully!")
+def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()

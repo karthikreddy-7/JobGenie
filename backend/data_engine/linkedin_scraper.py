@@ -5,6 +5,8 @@ import uuid
 
 from helper.util import safe_str
 from helper import constants as c
+from database.models import Job
+from database.setup_db import get_db
 
 
 class LinkedInDataEngine(DataEngine):
@@ -38,8 +40,19 @@ class LinkedInDataEngine(DataEngine):
                 company_url=safe_str(row.get(c.COMPANY_URL)),
             ))
 
+        db = next(get_db())
         for posting in job_postings:
-            print(posting)
+            job = Job(
+                job_id=posting.id,
+                title=posting.title,
+                description=posting.description,
+                company=posting.company,
+                location=posting.location,
+                link=posting.job_url,
+                source=posting.site
+            )
+            db.add(job)
+        db.commit()
 
         return job_postings
 
@@ -47,4 +60,5 @@ class LinkedInDataEngine(DataEngine):
 #Example Run
 if __name__=='__main__':
     engine = LinkedInDataEngine()
-    jobs = engine.fetch_jobs(query="software engineer", location="Mumbai, India", limit=1) # jobs is a list of JobPosting objects
+    jobs = engine.fetch_jobs(query="software engineer", location="Mumbai, India", limit=1)
+
