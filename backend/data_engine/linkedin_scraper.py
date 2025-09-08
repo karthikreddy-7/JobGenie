@@ -18,7 +18,7 @@ class LinkedInDataEngine(DataEngine):
             search_term=query,
             location=location,
             results_wanted=limit,
-            hours_old=10,
+            hours_old=100,
             linkedin_fetch_description=True
         )
         if jobs_df is None or jobs_df.empty:
@@ -43,6 +43,9 @@ class LinkedInDataEngine(DataEngine):
 
         db = next(get_db())
         for posting in job_postings:
+            existing_job = db.query(Job).filter(Job.job_id == posting.id).first()
+            if existing_job:
+                continue
             job = Job(
                 job_id=posting.id,
                 site=posting.site,
@@ -69,4 +72,4 @@ class LinkedInDataEngine(DataEngine):
 # from the project root (backend/)
 if __name__=='__main__':
     engine = LinkedInDataEngine()
-    jobs = engine.fetch_jobs(query="software engineer", location="Mumbai, India", limit=10)
+    jobs = engine.fetch_jobs(query="software engineer", location="Mumbai, India", limit=100)
