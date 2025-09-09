@@ -6,3 +6,5 @@ python-jobspy
 alembic
 fastapi
 uvicorn
+sentence-transformers
+torch
