@@ -4,3 +4,5 @@ python-dotenv
 SQLAlchemy
 python-jobspy
 alembic
+fastapi
+uvicorn
