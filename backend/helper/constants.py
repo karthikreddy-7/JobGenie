@@ -13,3 +13,14 @@ JOB_LEVEL = "job_level"
 DESCRIPTION = "description"
 COMPANY_INDUSTRY = "company_industry"
 COMPANY_URL = "company_url"
+
+# Email config keys
+SMTP_HOST_KEY = "SMTP_HOST"
+SMTP_PORT_KEY = "SMTP_PORT"
+SMTP_USER_KEY = "SMTP_USER"
+SMTP_PASS_KEY = "SMTP_PASS"
+RECIPIENT_EMAIL_KEY = "RECIPIENT_EMAIL"
+
+# Default values
+DEFAULT_SMTP_HOST = "smtp.gmail.com"
+DEFAULT_SMTP_PORT = 587

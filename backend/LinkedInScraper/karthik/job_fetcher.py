@@ -27,6 +27,7 @@ class JobFetcher:
         linkedin_fetch_description: bool = False,
         proxies: Optional[List[str]] = None,
         extra_params: Optional[Dict[str, Any]] = None,
+        country_indeed: Optional[str] = None,
     ) -> pd.DataFrame:
         """
         Fetch jobs from job boards using JobSpy.
@@ -51,6 +52,8 @@ class JobFetcher:
             params["proxies"] = proxies
         if extra_params:
             params.update(extra_params)
+        if country_indeed:
+            params["country_indeed"]=country_indeed
         try:
             jobs = scrape_jobs(**params)
             return jobs
@@ -99,8 +102,8 @@ class JobFetcher:
         """
         return list(jobs.columns)
 
+"""
 # Example usage for backend:
-
 fetcher = JobFetcher(default_site=["indeed"])
 jobs_df = fetcher.fetch_jobs(search_term="software engineer", location="San Francisco, CA", results_wanted=1)
 jobs_list = fetcher.format_jobs(jobs_df)
@@ -108,4 +111,5 @@ columns = fetcher.get_columns(jobs_df)
 
 print(jobs_list)
 print(columns)
+"""
 
