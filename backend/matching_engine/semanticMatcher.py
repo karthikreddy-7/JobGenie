@@ -11,7 +11,7 @@ logger = logging.getLogger(__name__)
 
 class LLMMatcher(MatchingEngine):
     def __init__(self):
-        self.client = OllamaChatClient(model="gemma3:1b")
+        self.client = OllamaChatClient(model="llama3.2")
 
     def find_pros_and_cons(self, job: JobPosting, user: UserProfile) -> float:
         # Placeholder implementation

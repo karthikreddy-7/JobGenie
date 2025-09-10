@@ -69,3 +69,19 @@ class Application(Base):
     # Relationships
     job = relationship("Job", back_populates="applications")
     user = relationship("User", back_populates="applications")
+
+
+# --- UserJobMatch Table ---
+class UserJobMatch(Base):
+    __tablename__ = "user_job_matches"
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    user_id = Column(String, ForeignKey("users.user_id"), nullable=False)
+    job_id = Column(String, ForeignKey("jobs.job_id"), nullable=False)
+    fit = Column(String, nullable=False)  # 'yes' or 'no'
+    reasons = Column(Text, nullable=True)
+    score = Column(Integer, nullable=True)
+    created_at = Column(DateTime, default=datetime.utcnow())
+
+    user = relationship("User")
+    job = relationship("Job")

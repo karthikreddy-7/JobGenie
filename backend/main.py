@@ -1,14 +1,28 @@
 from fastapi import FastAPI, Depends, HTTPException
 from typing import List, Optional
 import uvicorn
+from fastapi import Request
+from fastapi.exceptions import RequestValidationError
+from fastapi.exception_handlers import request_validation_exception_handler
 
 from database.models import User, Job
 from schemas.user import UserProfile
 from schemas.job import JobPosting
 from database.setup_db import get_db
 from sqlalchemy.orm import Session
+import logging
 
 app = FastAPI()
+
+logger = logging.getLogger(__name__)
+
+@app.exception_handler(RequestValidationError)
+async def validation_exception_handler(request: Request, exc: RequestValidationError):
+    # Log the validation errors in detail
+    logger.error(f"Validation error for request {request.url}: {exc.errors()}")
+    logger.error(f"Request body: {await request.body()}")
+    # Reuse FastAPI’s default response
+    return await request_validation_exception_handler(request, exc)
 
 @app.post("/users/", response_model=UserProfile)
 def create_user(user: UserProfile, db: Session = Depends(get_db)):
