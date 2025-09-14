@@ -6,11 +6,10 @@ from typing import Dict, List
 
 import pandas as pd
 
+from backend.schemas.job import JobPosting
 from scrapers.indeed_scraper import IndeedScraper
 from pipeline.fetcher import fetch_jobs
 from pipeline.transformer import transform_jobs
-from pipeline.loader import save_to_csv
-from schemas.job import JobPosting
 import config
 
 
@@ -98,7 +97,6 @@ def main():
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     output_filename = f"job_postings_{timestamp}.csv"
 
-    save_to_csv(all_job_postings, output_filename)
     logging.info("--- Pipeline finished successfully. ---")
 
 

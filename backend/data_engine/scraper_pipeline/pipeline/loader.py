@@ -40,9 +40,7 @@ def load_jobs_to_db(job_postings: List[JobPosting]):
                 description=posting.description,
                 company_industry=posting.company_industry,
                 company_url=posting.company_url,
-                # TODO: Add a new column 'experience_extracted' to the Job model
-                # and uncomment the following line:
-                # experience_extracted=experience
+                experience=experience
             )
             db.add(job)
             saved_count += 1

@@ -1,15 +1,6 @@
 from typing import Optional
 
 def should_save_job(experience: Optional[int]) -> bool:
-    """
-    Determines whether a job should be saved based on the required experience.
-
-    Args:
-        experience: The required years of experience for the job.
-
-    Returns:
-        True if the job should be saved, False otherwise.
-    """
     if experience is None:
         return False  # Don't save jobs where experience is not found
 
