@@ -1,10 +1,9 @@
 from sqlalchemy.orm import Session
 
-from database.setup_db import SessionLocal
-from user_engine.interfaces import UserEngine
-from schemas.user import *
-from database.models import User
-
+from backend.database.models import User
+from backend.database.setup_db import SessionLocal
+from backend.schemas.user import *
+from backend.user_engine.interfaces import UserEngine
 
 
 class UserEngineImpl(UserEngine):

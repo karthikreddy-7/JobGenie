@@ -1,9 +1,10 @@
 from sentence_transformers import SentenceTransformer, util
-import re
-from matching_engine.interfaces import MatchingEngine
-from schemas.job import JobPosting
-from schemas.user import UserProfile
 import logging
+from typing import Dict
+
+from backend.matching_engine.interfaces import MatchingEngine
+from backend.schemas.job import JobPosting
+from backend.schemas.user import UserProfile
 
 logging.basicConfig(
     level=logging.INFO,
@@ -12,91 +13,82 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-class LLMMatcher(MatchingEngine):
+
+class LLMMatcher():
     def __init__(self):
-        self.model = SentenceTransformer('/home/karthik/dev/models/JobBERT-v2')
+        self.model = SentenceTransformer("/home/karthik/dev/models/JobBERT-v2")
 
-    def _extract_experience(self, text):
-        """Extract required years of experience from job description or resume text."""
-        # Look for patterns like '3+ years', '5 years', 'at least 2 years', etc.
-        match = re.search(r'(\d+)\s*\+?\s*(?:years?|yrs?)', text, re.IGNORECASE)
-        if match:
-            return int(match.group(1))
-        return 0
-
-    def _get_resume_experience(self, resume_json):
-        """Try to extract total years of experience from resume JSON."""
-        # Try to find a field like 'total_experience', else parse work history
-        if 'total_experience' in resume_json:
-            return resume_json['total_experience']
-        # Fallback: sum durations in work history if available
-        years = 0
-        if 'work_experience' in resume_json:
-            for job in resume_json['work_experience']:
-                if 'duration_years' in job:
-                    years += job['duration_years']
-        return years
-
-    def _get_relevant_resume_text(self, resume):
-        """Extract and concatenate relevant resume sections for semantic similarity."""
+    def _get_relevant_resume_text(self, resume) -> str:
+        """
+        Concatenate the most relevant parts of the resume for semantic matching.
+        This avoids noise and ensures embeddings are focused.
+        """
         parts = []
-        # Summary
+
         if resume.summary:
             parts.append(resume.summary)
-        # Experience
-        for exp in resume.experience:
-            parts.append(exp.role)
-            parts.append(exp.company)
-            parts.extend(exp.bullets)
-        # Skills
-        skills = resume.skills
-        parts.extend(skills.programming_languages)
-        parts.extend(skills.frameworks_tools)
-        parts.extend(skills.other)
-        # Projects
-        for proj in resume.projects:
-            parts.append(proj.title)
-            parts.extend(proj.description_bullets)
-        return '\n'.join([str(p) for p in parts if p])
 
-    def match(self, job: JobPosting, user: UserProfile) -> dict:
-        """Return sub-scores and final match score for a user-job pair using JobBERT-v2."""
-        job_desc = job.description
-        resume_json = user.resume.json()
-        # Use only relevant resume sections for semantic similarity
+        if hasattr(resume, "experience"):
+            for exp in resume.experience:
+                parts.append(exp.role)
+                parts.append(exp.company)
+                parts.extend(exp.bullets or [])
+
+        if hasattr(resume, "projects"):
+            for proj in resume.projects:
+                parts.append(proj.title)
+                parts.extend(proj.description_bullets or [])
+
+        if hasattr(resume, "skills") and resume.skills:
+            # Add skills as a block of text for embedding
+            all_skills = (
+                resume.skills.programming_languages
+                + resume.skills.frameworks_tools
+                + resume.skills.other
+            )
+            parts.append("Skills: " + ", ".join(all_skills))
+
+        # Filter out empty strings
+        return "\n".join([str(p) for p in parts if p])
+
+    def match(self, job: JobPosting, user: UserProfile) -> Dict:
+        """
+        Match a job against a user profile using semantic similarity only.
+        Removes brittle regex/skill matching logic.
+        """
+        job_desc = job.description or ""
         resume_text = self._get_relevant_resume_text(user.resume)
 
-        required_exp = self._extract_experience(job_desc)
-        candidate_exp = self._get_resume_experience(resume_json)
-
-        reasons = []
-        if required_exp > 0 and candidate_exp < required_exp:
-            reasons.append(f"Required experience: {required_exp} years. Candidate has: {candidate_exp} years.")
+        if not job_desc.strip() or not resume_text.strip():
+            logger.warning("Empty job description or resume text.")
             return {
                 "fit": "No",
-                "reasons": reasons,
+                "reasons": ["Insufficient data for matching."],
                 "score": 0.0
             }
 
-        # Semantic similarity
+        # --- Semantic Similarity ---
         job_emb = self.model.encode(job_desc, convert_to_tensor=True)
         resume_emb = self.model.encode(resume_text, convert_to_tensor=True)
-        score = float(util.pytorch_cos_sim(job_emb, resume_emb).item())
+        semantic_score = float(util.pytorch_cos_sim(job_emb, resume_emb).item())
 
-        fit = "Yes" if score >= 0.6 else "No"
+        # Normalize score to [0, 1]
+        final_score = max(0.0, min(semantic_score, 1.0))
+
+        # Decision threshold
+        threshold = 0.6
+        fit = "Yes" if final_score >= threshold else "No"
+
+        # --- Reasons ---
+        reasons = [f"Semantic similarity score: {semantic_score:.2f}."]
         if fit == "No":
-            reasons.append(f"Semantic match score below threshold: {score:.2f}")
-        else:
-            reasons.append(f"Semantic match score: {score:.2f}")
+            reasons.append(f"Score is below the threshold ({threshold}).")
+
         return {
             "fit": fit,
             "reasons": reasons,
-            "score": round(score, 2)
+            "score": round(final_score, 2)
         }
-
-    def find_pros_and_cons(self, job: JobPosting, user: UserProfile) -> float:
-        # Optional: implement if needed
-        pass
 
     def is_recommended(self, job: JobPosting, user: UserProfile) -> bool:
         result = self.match(job, user)

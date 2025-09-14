@@ -7,5 +7,5 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 LOCATIONS_CONFIG_PATH = os.path.join(BASE_DIR, 'config', 'locations.json')
 
 # --- Scraping Parameters ---
-DEFAULT_JOBS_TO_SCRAPE = 1
+DEFAULT_JOBS_TO_SCRAPE = 100
 DEFAULT_HOURS_OLD = 24 # Corresponds to jobs posted in the last day
