@@ -18,7 +18,7 @@ def should_save_job(experience: Optional[int]) -> bool:
         return False  # Don't save jobs where experience is not found
 
     # Save jobs that require between 1 and 10 years of experience
-    if 1 <= experience <= 3:
+    if 0 <= experience <= 3:
         logger.info(f"Job with {experience} years of experience will be saved.")
         return True
     

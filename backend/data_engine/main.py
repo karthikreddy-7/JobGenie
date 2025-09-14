@@ -9,6 +9,7 @@ from backend.schemas.job import JobPosting
 from scrapers.indeed_scraper import IndeedScraper
 from pipeline.fetcher import fetch_jobs
 from pipeline.transformer import transform_jobs
+from pipeline.loader import load_jobs_to_db
 import config
 
 
@@ -61,7 +62,6 @@ def main():
 
     # Initialize scrapers
     scrapers = [IndeedScraper()]
-    all_job_postings: List[JobPosting] = []
 
     # Loop over each search term
     for search_term in SEARCH_TERMS:
@@ -84,14 +84,14 @@ def main():
             # 2. Transform
             logging.info(f"Transforming {len(raw_jobs_df)} raw job listings for {common_name}...")
             job_postings = transform_jobs(raw_jobs_df)
-            all_job_postings.extend(job_postings)
 
-    # 3. Load / Save
-    if not all_job_postings:
-        logging.info("Pipeline finished, but no job postings were found across all locations and search terms.")
-        return
+            # 3. Load / Save
+            if not job_postings:
+                logging.info("No job postings were found after transformation.")
+                continue
 
-    logging.info(f"Aggregated a total of {len(all_job_postings)} job postings.")
+            logging.info(f"Loading {len(job_postings)} job postings to the database for {common_name}...")
+            load_jobs_to_db(job_postings)
 
     logging.info("--- Pipeline finished successfully. ---")
 

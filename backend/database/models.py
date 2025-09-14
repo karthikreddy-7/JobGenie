@@ -37,8 +37,6 @@ class Job(Base):
     created_at = Column(DateTime, default=datetime.utcnow())
     min_exp_required = Column(Integer,nullable=True)
 
-    applications = relationship("Application", back_populates="job")
-
 
 # --- Users Table ---
 class User(Base):
@@ -49,8 +47,6 @@ class User(Base):
     preferences = Column(JSON, nullable=True)  # UserPreferences
     linkedin = Column(JSON, nullable=True)     # LinkedInCredentials
     user_automation_settings = Column(JSON, nullable=True)  # Automation Settings
-
-    applications = relationship("Application", back_populates="user")
 
 # --- UserJobMatch Table ---
 class UserJobMatch(Base):

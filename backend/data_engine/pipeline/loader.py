@@ -1,4 +1,5 @@
 # pipeline/loader.py
+import logging
 from typing import List
 
 from backend.data_engine.pipeline.experience_extractor import extract_experience
@@ -14,7 +15,7 @@ def load_jobs_to_db(job_postings: List[JobPosting]):
     and loads them into the database.
     """
     if not job_postings:
-        print("No job postings to load.")
+        logging.info("No job postings to load.")
         return
 
     db = next(get_db())
@@ -40,10 +41,10 @@ def load_jobs_to_db(job_postings: List[JobPosting]):
                 description=posting.description,
                 company_industry=posting.company_industry,
                 company_url=posting.company_url,
-                experience=experience
+                min_exp_required=experience
             )
             db.add(job)
             saved_count += 1
 
     db.commit()
-    print(f"Successfully saved {saved_count} job postings to the database.")
+    logging.info(f"Successfully saved {saved_count} job postings to the database.")
