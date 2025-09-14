@@ -1,3 +1,5 @@
+import enum
+
 SITE_NAME = "linkedin"
 
 # Job Posting Keys
@@ -24,3 +26,8 @@ RECIPIENT_EMAIL_KEY = "RECIPIENT_EMAIL"
 # Default values
 DEFAULT_SMTP_HOST = "smtp.gmail.com"
 DEFAULT_SMTP_PORT = 587
+
+class MatchStatus(enum.Enum):
+    READY_FOR_EMAIL = "READY_FOR_EMAIL"
+    EMAIL_SENT = "EMAIL_SENT"
+

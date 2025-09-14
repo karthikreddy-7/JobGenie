@@ -58,10 +58,6 @@ class User(Base):
     linkedin = Column(JSON, nullable=True)     # LinkedInCredentials
     user_automation_settings = Column(JSON, nullable=True)  # Automation Settings
 
-class MatchStatus(enum.Enum):
-    READY_FOR_EMAIL = "READY_FOR_EMAIL"
-    EMAIL_SENT = "EMAIL_SENT"
-
 # --- UserJobMatch Table ---
 class UserJobMatch(Base):
     __tablename__ = "user_job_matches"
@@ -72,7 +68,7 @@ class UserJobMatch(Base):
     fit = Column(String, nullable=False)  # 'yes' or 'no'
     reasons = Column(Text, nullable=True)
     score = Column(Integer, nullable=True)
-    status = Column(Enum(MatchStatus), default=MatchStatus.READY_FOR_EMAIL)
+    status = Column(Text, default="READY_FOR_EMAIL")
     created_at = Column(DateTime, default=datetime.utcnow())
 
     user = relationship("User")
