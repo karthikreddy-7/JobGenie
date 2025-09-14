@@ -101,7 +101,7 @@ class LLMMatcher():
         return {
             "fit": fit,
             "reasons": reasons,
-            "score": round(final_score, 2)
+            "score": round(semantic_score, 2)
         }
 
     def is_recommended(self, job: JobPosting, user: UserProfile) -> bool:

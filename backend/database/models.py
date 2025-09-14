@@ -1,6 +1,6 @@
 # models.py
 from sqlalchemy import (
-    create_engine, Column, String, Integer, Text, DateTime, Enum, JSON, Boolean, ForeignKey
+    create_engine, Column, String, Integer, Text, DateTime, Enum, JSON, Boolean, ForeignKey, Float
 )
 from sqlalchemy.orm import declarative_base, relationship
 import enum
@@ -67,7 +67,7 @@ class UserJobMatch(Base):
     job_id = Column(String, ForeignKey("jobs.job_id"), nullable=False)
     fit = Column(String, nullable=False)  # 'yes' or 'no'
     reasons = Column(Text, nullable=True)
-    score = Column(Integer, nullable=True)
+    score = Column(Float, nullable=True)
     status = Column(Text, default="READY_FOR_EMAIL")
     created_at = Column(DateTime, default=datetime.utcnow())
 
