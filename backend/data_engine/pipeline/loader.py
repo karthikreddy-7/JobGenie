@@ -1,8 +1,8 @@
 # pipeline/loader.py
 from typing import List
 
-from backend.data_engine.scraper_pipeline.pipeline.experience_extractor import extract_experience
-from backend.data_engine.scraper_pipeline.pipeline.filter import should_save_job
+from backend.data_engine.pipeline.experience_extractor import extract_experience
+from backend.data_engine.pipeline.filter import should_save_job
 from backend.database.models import Job
 from backend.database.setup_db import get_db
 from backend.schemas.job import JobPosting

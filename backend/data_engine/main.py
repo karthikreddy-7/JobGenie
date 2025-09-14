@@ -1,5 +1,4 @@
 import json
-import os
 import logging
 from datetime import datetime
 from typing import Dict, List
@@ -40,10 +39,8 @@ def main():
     setup_logging()
 
     # --- Parameters to Configure ---
-    SEARCH_TERM = "Software Engineer"
-    # Set to a specific location name from locations.json (e.g., "New York")
-    # or set to None to run for all locations.
-    LOCATION = None
+    SEARCH_TERMS = ["Data Analyst", "Data Engineer", "Data Scientist"]  # multiple search terms
+    LOCATION = None  # set to a specific location name or None to process all
     JOBS_TO_SCRAPE = config.DEFAULT_JOBS_TO_SCRAPE
     HOURS_OLD = config.DEFAULT_HOURS_OLD
     # -----------------------------
@@ -66,40 +63,38 @@ def main():
     scrapers = [IndeedScraper()]
     all_job_postings: List[JobPosting] = []
 
-    # Main processing loop
-    for common_name, location_map in locations_to_process.items():
-        logging.info(f"--- Processing location: {common_name} ---")
+    # Loop over each search term
+    for search_term in SEARCH_TERMS:
+        logging.info(f"=== Processing search term: '{search_term}' ===")
+        for common_name, location_map in locations_to_process.items():
+            logging.info(f"--- Processing location: {common_name} ---")
 
-        # 1. Fetch
-        raw_jobs_df = fetch_jobs(
-            scrapers=scrapers,
-            search_term=SEARCH_TERM,
-            location_map=location_map,
-            jobs=JOBS_TO_SCRAPE,
-            hours_old=HOURS_OLD
-        )
-        if raw_jobs_df.empty:
-            logging.warning(f"No jobs found for '{SEARCH_TERM}' in '{common_name}'.")
-            continue
+            # 1. Fetch
+            raw_jobs_df = fetch_jobs(
+                scrapers=scrapers,
+                search_term=search_term,
+                location_map=location_map,
+                jobs=JOBS_TO_SCRAPE,
+                hours_old=HOURS_OLD
+            )
+            if raw_jobs_df.empty:
+                logging.warning(f"No jobs found for '{search_term}' in '{common_name}'.")
+                continue
 
-        # 2. Transform
-        logging.info(f"Transforming {len(raw_jobs_df)} raw job listings for {common_name}...")
-        job_postings = transform_jobs(raw_jobs_df)
-        all_job_postings.extend(job_postings)
+            # 2. Transform
+            logging.info(f"Transforming {len(raw_jobs_df)} raw job listings for {common_name}...")
+            job_postings = transform_jobs(raw_jobs_df)
+            all_job_postings.extend(job_postings)
 
-    # 3. Load
+    # 3. Load / Save
     if not all_job_postings:
-        logging.info("Pipeline finished, but no job postings were found across all locations.")
+        logging.info("Pipeline finished, but no job postings were found across all locations and search terms.")
         return
 
     logging.info(f"Aggregated a total of {len(all_job_postings)} job postings.")
-
-    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    output_filename = f"job_postings_{timestamp}.csv"
 
     logging.info("--- Pipeline finished successfully. ---")
 
 
 if __name__ == "__main__":
     main()
-
