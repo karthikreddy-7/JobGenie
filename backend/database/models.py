@@ -38,6 +38,16 @@ class Job(Base):
     min_exp_required = Column(Integer,nullable=True)
 
 
+# --- Seen Jobs Table ---
+class SeenJob(Base):
+    __tablename__ = "seen_jobs"
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    job_id = Column(String(255), unique=True, nullable=False, index=True)
+    source = Column(String(50), nullable=False)
+    created_at = Column(DateTime, default=datetime.utcnow)
+
+
 # --- Users Table ---
 class User(Base):
     __tablename__ = "users"
