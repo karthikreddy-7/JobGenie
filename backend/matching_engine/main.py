@@ -34,20 +34,19 @@ def main():
         user_start_time = time.time()
         logger.info(f"👤 Processing User: {user.user_id}")
 
+
         # Parse resume JSON from DB into Resume object
         try:
-            resume_obj = Resume(**json.loads(user.resume))
+            user_profile = UserProfile(
+                user_id=user.user_id,
+                resume=Resume(**user.resume),
+                preferences=user.preferences,
+                linkedin=user.linkedin,
+                user_automation_settings=user.user_automation_settings
+            )
         except Exception as e:
             logger.error(f"❌ Failed to parse resume for user {user.user_id}: {e}")
             continue
-
-        user_profile = UserProfile(
-            user_id=user.user_id,
-            resume=resume_obj,
-            preferences=None,
-            linkedin=None,
-            user_automation_settings=None
-        )
 
         for job in jobs[:50]:
             job_start_time = time.time()

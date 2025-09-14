@@ -2,12 +2,17 @@ import logging
 from typing import List, Dict, Generator, Optional
 from ollama import chat
 
-logging.basicConfig(level=logging.INFO)
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s [%(levelname)s] %(message)s',
+    datefmt='%Y-%m-%d %H:%M:%S',
+    handlers=[logging.StreamHandler()]
+)
 logger = logging.getLogger(__name__)
 
 
 class OllamaChatClient:
-    def __init__(self, model: str = "gemma3:1b"):
+    def __init__(self, model: str = "gemma3:270m"):
         self.model = model
 
     def send_message(
@@ -40,14 +45,27 @@ class OllamaChatClient:
 
 # Example usage
 if __name__ == "__main__":
-    client = OllamaChatClient(model="gemma3:1b")
+    client = OllamaChatClient(model="llama3.2")
+    jd=input("Enter the Job Description: ")
+    prompt=f"""
+You must read the Job Description carefully. 
+Look for statements like "X+ years", "minimum Y years", or "at least Z years". 
+If multiple values appear, return the SMALLEST number mentioned. 
+If no clear years of experience is mentioned, return null.
+
+    ### Output rules:
+    - Output ONLY valid JSON.
+    - The JSON must have exactly one key: "minimum_experience_years".
+    - Value must be an integer if specified, otherwise null.
+    - Do not include any other fields, explanations, or text.
+    ### Example Outputs:
+    {{"minimum_experience_years": 2}}
+    {{"minimum_experience_years": null}}
+    ### Job Description:
+    {jd}
+    """
     response = client.send_message(
-        messages=[{"role": "user", "content": "Can you return karthik email"}],
+        messages=[{"role": "user", "content": prompt}],
         stream=False
     )
     print("Non-stream response:", response)
-    print("\nStream response:")
-    client.send_message(
-        messages=[{"role": "user", "content": "Tell me a short story about Karthik"}],
-        stream=True
-    )

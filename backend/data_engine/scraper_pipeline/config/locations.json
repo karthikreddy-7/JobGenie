@@ -1,0 +1,303 @@
+{
+  "Bangalore": {
+    "linkedin": "Bengaluru, Karnataka, India",
+    "indeed": "Bangalore, Karnataka",
+    "naukri": "Bengaluru/Bangalore"
+  },
+  "San Francisco": {
+    "linkedin": "San Francisco, California, United States",
+    "indeed": "San Francisco, CA",
+    "naukri": "San Francisco"
+  },
+  "New York": {
+    "linkedin": "",
+    "indeed": "New York, NY",
+    "naukri": ""
+  },
+  "San Jose": {
+    "linkedin": "",
+    "indeed": "San Jose, CA",
+    "naukri": ""
+  },
+  "Palo Alto": {
+    "linkedin": "",
+    "indeed": "Palo Alto, CA",
+    "naukri": ""
+  },
+  "Seattle": {
+    "linkedin": "",
+    "indeed": "Seattle, WA",
+    "naukri": ""
+  },
+  "Chicago": {
+    "linkedin": "",
+    "indeed": "Chicago, IL",
+    "naukri": ""
+  },
+  "Houston": {
+    "linkedin": "",
+    "indeed": "Houston, TX",
+    "naukri": ""
+  },
+  "Los Angeles": {
+    "linkedin": "",
+    "indeed": "Los Angeles, CA",
+    "naukri": ""
+  },
+  "Dallas": {
+    "linkedin": "",
+    "indeed": "Dallas, TX",
+    "naukri": ""
+  },
+  "Fort Worth": {
+    "linkedin": "",
+    "indeed": "Fort Worth, TX",
+    "naukri": ""
+  },
+  "Boston": {
+    "linkedin": "",
+    "indeed": "Boston, MA",
+    "naukri": ""
+  },
+  "Atlanta": {
+    "linkedin": "",
+    "indeed": "Atlanta, GA",
+    "naukri": ""
+  },
+  "Washington": {
+    "linkedin": "",
+    "indeed": "Washington, DC",
+    "naukri": ""
+  },
+  "Arlington": {
+    "linkedin": "",
+    "indeed": "Arlington, VA",
+    "naukri": ""
+  },
+  "Austin": {
+    "linkedin": "",
+    "indeed": "Austin, TX",
+    "naukri": ""
+  },
+  "Raleigh": {
+    "linkedin": "",
+    "indeed": "Raleigh, NC",
+    "naukri": ""
+  },
+  "Durham": {
+    "linkedin": "",
+    "indeed": "Durham, NC",
+    "naukri": ""
+  },
+  "Nashville": {
+    "linkedin": "",
+    "indeed": "Nashville, TN",
+    "naukri": ""
+  },
+  "Denver": {
+    "linkedin": "",
+    "indeed": "Denver, CO",
+    "naukri": ""
+  },
+  "Salt Lake City": {
+    "linkedin": "",
+    "indeed": "Salt Lake City, UT",
+    "naukri": ""
+  },
+  "Columbus": {
+    "linkedin": "",
+    "indeed": "Columbus, OH",
+    "naukri": ""
+  },
+  "Pittsburgh": {
+    "linkedin": "",
+    "indeed": "Pittsburgh, PA",
+    "naukri": ""
+  },
+  "Orlando": {
+    "linkedin": "",
+    "indeed": "Orlando, FL",
+    "naukri": ""
+  },
+  "Phoenix": {
+    "linkedin": "",
+    "indeed": "Phoenix, AZ",
+    "naukri": ""
+  },
+  "Miami": {
+    "linkedin": "",
+    "indeed": "Miami, FL",
+    "naukri": ""
+  },
+  "Charlotte": {
+    "linkedin": "",
+    "indeed": "Charlotte, NC",
+    "naukri": ""
+  },
+  "San Diego": {
+    "linkedin": "",
+    "indeed": "San Diego, CA",
+    "naukri": ""
+  },
+  "Minneapolis": {
+    "linkedin": "",
+    "indeed": "Minneapolis, MN",
+    "naukri": ""
+  },
+  "Saint Paul": {
+    "linkedin": "",
+    "indeed": "Saint Paul, MN",
+    "naukri": ""
+  },
+  "Detroit": {
+    "linkedin": "",
+    "indeed": "Detroit, MI",
+    "naukri": ""
+  },
+  "Philadelphia": {
+    "linkedin": "",
+    "indeed": "Philadelphia, PA",
+    "naukri": ""
+  },
+  "Indianapolis": {
+    "linkedin": "",
+    "indeed": "Indianapolis, IN",
+    "naukri": ""
+  },
+  "St. Louis": {
+    "linkedin": "",
+    "indeed": "St. Louis, MO",
+    "naukri": ""
+  },
+  "Kansas City": {
+    "linkedin": "",
+    "indeed": "Kansas City, MO",
+    "naukri": ""
+  },
+  "Cincinnati": {
+    "linkedin": "",
+    "indeed": "Cincinnati, OH",
+    "naukri": ""
+  },
+  "Cleveland": {
+    "linkedin": "",
+    "indeed": "Cleveland, OH",
+    "naukri": ""
+  },
+  "Milwaukee": {
+    "linkedin": "",
+    "indeed": "Milwaukee, WI",
+    "naukri": ""
+  },
+  "Tampa": {
+    "linkedin": "",
+    "indeed": "Tampa, FL",
+    "naukri": ""
+  },
+  "Saint Petersburg": {
+    "linkedin": "",
+    "indeed": "Saint Petersburg, FL",
+    "naukri": ""
+  },
+  "Jacksonville": {
+    "linkedin": "",
+    "indeed": "Jacksonville, FL",
+    "naukri": ""
+  },
+  "San Antonio": {
+    "linkedin": "",
+    "indeed": "San Antonio, TX",
+    "naukri": ""
+  },
+  "Portland": {
+    "linkedin": "",
+    "indeed": "Portland, OR",
+    "naukri": ""
+  },
+  "Baltimore": {
+    "linkedin": "",
+    "indeed": "Baltimore, MD",
+    "naukri": ""
+  },
+  "Las Vegas": {
+    "linkedin": "",
+    "indeed": "Las Vegas, NV",
+    "naukri": ""
+  },
+  "Albany": {
+    "linkedin": "",
+    "indeed": "Albany, NY",
+    "naukri": ""
+  },
+  "Hartford": {
+    "linkedin": "",
+    "indeed": "Hartford, CT",
+    "naukri": ""
+  },
+  "Providence": {
+    "linkedin": "",
+    "indeed": "Providence, RI",
+    "naukri": ""
+  },
+  "Richmond": {
+    "linkedin": "",
+    "indeed": "Richmond, VA",
+    "naukri": ""
+  },
+  "Oklahoma City": {
+    "linkedin": "",
+    "indeed": "Oklahoma City, OK",
+    "naukri": ""
+  },
+  "Tulsa": {
+    "linkedin": "",
+    "indeed": "Tulsa, OK",
+    "naukri": ""
+  },
+  "New Orleans": {
+    "linkedin": "",
+    "indeed": "New Orleans, LA",
+    "naukri": ""
+  },
+  "Memphis": {
+    "linkedin": "",
+    "indeed": "Memphis, TN",
+    "naukri": ""
+  },
+  "Louisville": {
+    "linkedin": "",
+    "indeed": "Louisville, KY",
+    "naukri": ""
+  },
+  "Omaha": {
+    "linkedin": "",
+    "indeed": "Omaha, NE",
+    "naukri": ""
+  },
+  "Des Moines": {
+    "linkedin": "",
+    "indeed": "Des Moines, IA",
+    "naukri": ""
+  },
+  "Boise": {
+    "linkedin": "",
+    "indeed": "Boise, ID",
+    "naukri": ""
+  },
+  "Birmingham": {
+    "linkedin": "",
+    "indeed": "Birmingham, AL",
+    "naukri": ""
+  },
+  "Albuquerque": {
+    "linkedin": "",
+    "indeed": "Albuquerque, NM",
+    "naukri": ""
+  },
+  "Madison": {
+    "linkedin": "",
+    "indeed": "Madison, WI",
+    "naukri": ""
+  }
+}
+

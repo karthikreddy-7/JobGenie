@@ -35,6 +35,7 @@ class Job(Base):
     company_industry = Column(String, nullable=True)       # company_industry
     company_url = Column(Text, nullable=True)              # company_url
     created_at = Column(DateTime, default=datetime.utcnow())
+    min_exp_required = Column(Integer,nullable=True)
 
     applications = relationship("Application", back_populates="job")
 
@@ -50,26 +51,6 @@ class User(Base):
     user_automation_settings = Column(JSON, nullable=True)  # Automation Settings
 
     applications = relationship("Application", back_populates="user")
-
-
-# --- Applications Table ---
-class Application(Base):
-    __tablename__ = "applications"
-
-    application_id = Column(Integer, primary_key=True, autoincrement=True)
-    job_id = Column(String, ForeignKey("jobs.job_id", ondelete="CASCADE"))
-    user_id = Column(String, ForeignKey("users.user_id", ondelete="CASCADE"))
-
-    status = Column(Enum(ApplicationStatusEnum), nullable=False)
-    status_reason = Column(Text, nullable=True)
-    applied_on = Column(DateTime, default=datetime.utcnow)
-    referral_sent = Column(Integer, default=0)
-    referral_accepted = Column(Integer, default=0)
-
-    # Relationships
-    job = relationship("Job", back_populates="applications")
-    user = relationship("User", back_populates="applications")
-
 
 # --- UserJobMatch Table ---
 class UserJobMatch(Base):

@@ -2,7 +2,7 @@ import os
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
-from LinkedInScraper.karthik.job_fetcher import JobFetcher
+from LinkedInScraper.job_fetcher import JobFetcher
 from helper.constants import SMTP_HOST_KEY, SMTP_PORT_KEY, SMTP_USER_KEY, SMTP_PASS_KEY, RECIPIENT_EMAIL_KEY, DEFAULT_SMTP_HOST, DEFAULT_SMTP_PORT
 import logging
 from dotenv import load_dotenv

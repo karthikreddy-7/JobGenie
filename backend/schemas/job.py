@@ -15,3 +15,4 @@ class JobPosting(BaseModel):
     description: str
     company_industry: str
     company_url: str
+    min_exp_required: Optional[str] = None
