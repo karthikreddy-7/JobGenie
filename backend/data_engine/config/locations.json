@@ -293,6 +293,116 @@
     "linkedin": "",
     "indeed": "Madison, WI",
     "naukri": ""
+  },
+  "Hyderabad": {
+    "linkedin": "Hyderabad",
+    "indeed": "Hyderabad, Telangana",
+    "naukri": "hyderabad"
+  },
+  "Bengaluru": {
+    "linkedin": "Bengaluru",
+    "indeed": "Bengaluru, Karnataka",
+    "naukri": "bangalore"
+  },
+  "Mumbai": {
+    "linkedin": "Mumbai",
+    "indeed": "Mumbai, Maharashtra",
+    "naukri": "mumbai"
+  },
+  "Delhi": {
+    "linkedin": "Delhi",
+    "indeed": "Delhi, Delhi",
+    "naukri": "delhi"
+  },
+  "Chennai": {
+    "linkedin": "Chennai",
+    "indeed": "Chennai, Tamil Nadu",
+    "naukri": "chennai"
+  },
+  "Kolkata": {
+    "linkedin": "Kolkata",
+    "indeed": "Kolkata, West Bengal",
+    "naukri": "kolkata"
+  },
+  "Pune": {
+    "linkedin": "Pune",
+    "indeed": "Pune, Maharashtra",
+    "naukri": "pune"
+  },
+  "Ahmedabad": {
+    "linkedin": "Ahmedabad",
+    "indeed": "Ahmedabad, Gujarat",
+    "naukri": "ahmedabad"
+  },
+  "Gurugram": {
+    "linkedin": "Gurugram",
+    "indeed": "Gurugram, Haryana",
+    "naukri": "gurgaon"
+  },
+  "Noida": {
+    "linkedin": "Noida",
+    "indeed": "Noida, Uttar Pradesh",
+    "naukri": "noida"
+  },
+  "Chandigarh": {
+    "linkedin": "Chandigarh",
+    "indeed": "Chandigarh, Chandigarh",
+    "naukri": "chandigarh"
+  },
+  "Jaipur": {
+    "linkedin": "Jaipur",
+    "indeed": "Jaipur, Rajasthan",
+    "naukri": "jaipur"
+  },
+  "Kochi": {
+    "linkedin": "Kochi",
+    "indeed": "Kochi, Kerala",
+    "naukri": "kochi"
+  },
+  "Coimbatore": {
+    "linkedin": "Coimbatore",
+    "indeed": "Coimbatore, Tamil Nadu",
+    "naukri": "coimbatore"
+  },
+  "Indore": {
+    "linkedin": "Indore",
+    "indeed": "Indore, Madhya Pradesh",
+    "naukri": "indore"
+  },
+  "Lucknow": {
+    "linkedin": "Lucknow",
+    "indeed": "Lucknow, Uttar Pradesh",
+    "naukri": "lucknow"
+  },
+  "Nagpur": {
+    "linkedin": "Nagpur",
+    "indeed": "Nagpur, Maharashtra",
+    "naukri": "nagpur"
+  },
+  "Vadodara": {
+    "linkedin": "Vadodara",
+    "indeed": "Vadodara, Gujarat",
+    "naukri": "vadodara"
+  },
+  "Thiruvananthapuram": {
+    "linkedin": "Thiruvananthapuram",
+    "indeed": "Thiruvananthapuram, Kerala",
+    "naukri": "trivandrum"
+  },
+  "Bhubaneswar": {
+    "linkedin": "Bhubaneswar",
+    "indeed": "Bhubaneswar, Odisha",
+    "naukri": "bhubaneswar"
+  },
+  "Visakhapatnam": {
+    "linkedin": "Visakhapatnam",
+    "indeed": "Visakhapatnam, Andhra Pradesh",
+    "naukri": "visakhapatnam"
+  },
+  "Goa": {
+    "linkedin": "Goa",
+    "indeed": "Goa, Goa",
+    "naukri": "goa"
   }
 }
 

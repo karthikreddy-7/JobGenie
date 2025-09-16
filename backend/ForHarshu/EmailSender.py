@@ -131,5 +131,5 @@ def main(user_id: str, recipient_email: str):
 
 if __name__ == "__main__":
     example_user_id = "harshithavalli6@gmail.com"  # Replace with actual user ID
-    example_recipient_email = "basupallykarthikreddy@gmail.com"
+    example_recipient_email = "harshithavalli6@gmail.com"
     main(example_user_id, example_recipient_email)

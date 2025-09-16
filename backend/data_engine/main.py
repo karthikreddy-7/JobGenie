@@ -41,8 +41,9 @@ def main():
     setup_logging()
 
     # --- Parameters to Configure ---
-    SEARCH_TERMS = ["Data Analyst", "Data Engineer", "Data Scientist"]  # multiple search terms
-    LOCATION = None  # set to a specific location name or None to process all
+    SEARCH_TERMS = ["Software Engineer","Software Developer"]
+    # Set to a list of location names (e.g., ["Hyderabad", "Bengaluru"]) or None to process all
+    LOCATIONS = ["Hyderabad", "Bengaluru","Mumbai"]
     JOBS_TO_SCRAPE = config.DEFAULT_JOBS_TO_SCRAPE
     HOURS_OLD = config.DEFAULT_HOURS_OLD
     # -----------------------------
@@ -52,11 +53,18 @@ def main():
         return
 
     # Determine which locations to process
-    if LOCATION:
-        if LOCATION not in locations:
-            logging.error(f"Error: Location '{LOCATION}' not found in locations.json")
+    if LOCATIONS:
+        locations_to_process = {}
+        for loc in LOCATIONS:
+            if loc in locations:
+                locations_to_process[loc] = locations[loc]
+            else:
+                logging.warning(f"Location '{loc}' not found in locations.json and will be skipped.")
+
+        if not locations_to_process:
+            logging.error("None of the specified locations were valid. Exiting.")
             return
-        locations_to_process = {LOCATION: locations[LOCATION]}
+        logging.info(f"Processing for specified locations: {list(locations_to_process.keys())}")
     else:
         logging.info("No specific location provided. Running for all locations...")
         locations_to_process = locations

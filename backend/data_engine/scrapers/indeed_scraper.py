@@ -18,7 +18,8 @@ class IndeedScraper(BaseScraper):
                 search_term=search_term,
                 location=location,
                 results_wanted=jobs,
-                hours_old = hours_old
+                hours_old = hours_old,
+                #country_indeed="india"
             )
             if df is not None and not df.empty:
                 logger.info(f"Successfully scraped {len(df)} jobs from Indeed.")
