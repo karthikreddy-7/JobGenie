@@ -9,9 +9,9 @@ from backend.schemas.job import JobPosting
 
 logger = logging.getLogger(__name__)
 
-def transform_jobs(df: pd.DataFrame) -> List[JobPosting]:
+def transform_jobs(df: pd.DataFrame, common_location: str) -> List[JobPosting]:
     """Transforms a DataFrame of raw job data into a list of JobPosting objects."""
-    logger.info(f"Transforming {len(df)} raw job listings.")
+    logger.info(f"Transforming {len(df)} raw job listings for location: {common_location}.")
     job_postings = []
     for _, row in df.iterrows():
         try:
@@ -24,7 +24,7 @@ def transform_jobs(df: pd.DataFrame) -> List[JobPosting]:
                 job_url_direct=safe_str(row.get(JobFields.JOB_URL_DIRECT)),
                 title=safe_str(row.get(JobFields.TITLE)),
                 company=safe_str(row.get(JobFields.COMPANY)),
-                location=safe_str(row.get(JobFields.LOCATION)),
+                location=common_location,  # Overwrite with common location
                 date_posted=safe_str(row.get(JobFields.DATE_POSTED)),
                 job_level=safe_str(row.get("job_level")),
                 description=safe_str(row.get(JobFields.DESCRIPTION)),
